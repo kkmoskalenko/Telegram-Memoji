@@ -14,6 +14,8 @@
 		9BA67F50268A044500B7597F /* Telegram_Memoji.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9BA67F4E268A044500B7597F /* Telegram_Memoji.xcdatamodeld */; };
 		9BA67F52268A044600B7597F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9BA67F51268A044600B7597F /* Assets.xcassets */; };
 		9BA67F55268A044600B7597F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BA67F53268A044600B7597F /* LaunchScreen.storyboard */; };
+		9BCF9705268C34DD00D7FD6D /* StickerInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BCF9704268C34DD00D7FD6D /* StickerInputViewController.swift */; };
+		9BCF9708268C6E6B00D7FD6D /* UITextInputMode+Emoji.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BCF9707268C6E6B00D7FD6D /* UITextInputMode+Emoji.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,8 @@
 		9BA67F51268A044600B7597F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9BA67F54268A044600B7597F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9BA67F56268A044600B7597F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9BCF9704268C34DD00D7FD6D /* StickerInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerInputViewController.swift; sourceTree = "<group>"; };
+		9BCF9707268C6E6B00D7FD6D /* UITextInputMode+Emoji.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextInputMode+Emoji.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +56,7 @@
 			isa = PBXGroup;
 			children = (
 				9BA67F49268A044500B7597F /* StickerSetsViewController.swift */,
+				9BCF9704268C34DD00D7FD6D /* StickerInputViewController.swift */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -77,6 +82,7 @@
 			children = (
 				9B589652268C29940053A936 /* Delegates */,
 				9B589653268C29A30053A936 /* View Controllers */,
+				9BCF9706268C6E4300D7FD6D /* Extensions */,
 				9BA67F4B268A044500B7597F /* Main.storyboard */,
 				9BA67F51268A044600B7597F /* Assets.xcassets */,
 				9BA67F53268A044600B7597F /* LaunchScreen.storyboard */,
@@ -84,6 +90,14 @@
 				9BA67F4E268A044500B7597F /* Telegram_Memoji.xcdatamodeld */,
 			);
 			path = "Telegram-Memoji";
+			sourceTree = "<group>";
+		};
+		9BCF9706268C6E4300D7FD6D /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				9BCF9707268C6E6B00D7FD6D /* UITextInputMode+Emoji.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -160,6 +174,8 @@
 				9BA67F50268A044500B7597F /* Telegram_Memoji.xcdatamodeld in Sources */,
 				9BA67F46268A044500B7597F /* AppDelegate.swift in Sources */,
 				9BA67F48268A044500B7597F /* SceneDelegate.swift in Sources */,
+				9BCF9705268C34DD00D7FD6D /* StickerInputViewController.swift in Sources */,
+				9BCF9708268C6E6B00D7FD6D /* UITextInputMode+Emoji.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
