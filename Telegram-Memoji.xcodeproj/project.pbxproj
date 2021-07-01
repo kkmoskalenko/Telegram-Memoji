@@ -16,6 +16,7 @@
 		9BA67F55268A044600B7597F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BA67F53268A044600B7597F /* LaunchScreen.storyboard */; };
 		9BCF9705268C34DD00D7FD6D /* StickerInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BCF9704268C34DD00D7FD6D /* StickerInputViewController.swift */; };
 		9BCF9708268C6E6B00D7FD6D /* UITextInputMode+Emoji.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BCF9707268C6E6B00D7FD6D /* UITextInputMode+Emoji.swift */; };
+		9BE360A2268C845C003C4370 /* StickerCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BE360A1268C845C003C4370 /* StickerCollectionViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		9BA67F56268A044600B7597F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9BCF9704268C34DD00D7FD6D /* StickerInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerInputViewController.swift; sourceTree = "<group>"; };
 		9BCF9707268C6E6B00D7FD6D /* UITextInputMode+Emoji.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextInputMode+Emoji.swift"; sourceTree = "<group>"; };
+		9BE360A1268C845C003C4370 /* StickerCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerCollectionViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +58,7 @@
 			isa = PBXGroup;
 			children = (
 				9BA67F49268A044500B7597F /* StickerSetsViewController.swift */,
+				9BE360A1268C845C003C4370 /* StickerCollectionViewController.swift */,
 				9BCF9704268C34DD00D7FD6D /* StickerInputViewController.swift */,
 			);
 			path = "View Controllers";
@@ -176,6 +179,7 @@
 				9BA67F48268A044500B7597F /* SceneDelegate.swift in Sources */,
 				9BCF9705268C34DD00D7FD6D /* StickerInputViewController.swift in Sources */,
 				9BCF9708268C6E6B00D7FD6D /* UITextInputMode+Emoji.swift in Sources */,
+				9BE360A2268C845C003C4370 /* StickerCollectionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
