@@ -1,4 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="false" userDefinedModelVersionIdentifier="">
-    <elements/>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="18154" systemVersion="20F71" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Sticker" representedClassName="Sticker" syncable="YES" codeGenerationType="class">
+        <attribute name="emojis" attributeType="String"/>
+        <attribute name="imageData" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
+        <relationship name="stickerSet" maxCount="1" deletionRule="Nullify" destinationEntity="StickerSet" inverseName="stickers" inverseEntity="StickerSet"/>
+    </entity>
+    <entity name="StickerSet" representedClassName="StickerSet" syncable="YES" codeGenerationType="class">
+        <attribute name="editDate" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="isImported" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <relationship name="stickers" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="Sticker" inverseName="stickerSet" inverseEntity="Sticker"/>
+    </entity>
+    <elements>
+        <element name="Sticker" positionX="200" positionY="0" width="128" height="88"/>
+        <element name="StickerSet" positionX="0" positionY="0" width="128" height="88"/>
+    </elements>
 </model>
