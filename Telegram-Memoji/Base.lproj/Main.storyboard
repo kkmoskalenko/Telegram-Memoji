@@ -24,6 +24,9 @@
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="5XT-6l-lYy" kind="show" identifier="ShowStickerSetDetailSegue" id="2TA-bd-gAk"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -34,7 +37,7 @@
                     <navigationItem key="navigationItem" title="Sticker Sets" id="Bn4-rQ-PJI">
                         <barButtonItem key="leftBarButtonItem" systemItem="add" id="Ibf-pD-nmC">
                             <connections>
-                                <segue destination="5XT-6l-lYy" kind="show" id="VHU-Zd-UKh"/>
+                                <action selector="addBarButtonAction:" destination="QFo-2i-HiW" id="I5a-UX-6TR"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

@@ -8,6 +8,7 @@
 import UIKit
 
 final class StickerCollectionViewController: UICollectionViewController {
+    var stickerSet: StickerSet?    
     private var cellSize = CGSize.zero
     
     override func viewWillTransition(
@@ -32,7 +33,7 @@ extension StickerCollectionViewController {
     override func collectionView(
         _ collectionView: UICollectionView,
         numberOfItemsInSection section: Int
-    ) -> Int { 100 }
+    ) -> Int { stickerSet?.stickers?.count ?? 0 }
     
     override func collectionView(
         _ collectionView: UICollectionView,
@@ -42,8 +43,13 @@ extension StickerCollectionViewController {
             withReuseIdentifier: Self.reuseIdentifier,
             for: indexPath) as! StickerImageCell
         
-        // Configure the cell
-        cell.backgroundColor = .systemFill
+        guard indexPath.section == 0 else { return cell }
+        
+        if let sticker = stickerSet?.stickers?
+            .object(at: indexPath.item) as? Sticker,
+           let imageData = sticker.imageData,
+           let image = UIImage(data: imageData)
+        { cell.imageView.image = image }
         
         return cell
     }
