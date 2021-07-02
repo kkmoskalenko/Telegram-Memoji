@@ -26,14 +26,8 @@ extension StickerSetsViewController {
                 StickerCollectionViewController
         else { return }
         
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let context = appDelegate.persistentContainer.viewContext
-        
-        if sender is UIBarButtonItem {
-            destination.stickerSet = StickerSet(context: context)
-        } else if
-            let cell = sender as? UITableViewCell,
-            let indexPath = tableView.indexPath(for: cell)
+        if let cell = sender as? UITableViewCell,
+           let indexPath = tableView.indexPath(for: cell)
         {
             // TODO: Handle the cell tap
             print("Tapped at \(indexPath)")

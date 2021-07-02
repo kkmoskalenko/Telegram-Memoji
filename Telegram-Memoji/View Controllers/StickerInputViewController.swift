@@ -6,11 +6,8 @@
 //
 
 import UIKit
-import CoreData
 
 final class StickerInputViewController: UIViewController {
-    var context: NSManagedObjectContext!
-    
     private var _canResignFirstResponder = false
     private var stickerImage: UIImage? {
         didSet {
@@ -147,6 +144,7 @@ extension StickerInputViewController {
     
     @IBAction func doneButtonAction(_ sender: UIBarButtonItem) {
         if let image = stickerImage {
+            let context = Self.managedObjectContext
             let sticker = Sticker(context: context)
             sticker.imageData = image.pngData()
             sticker.emojis = ""

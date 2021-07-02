@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9B5F3BEB268F286A00222100 /* NSManagedObjectContext+Save.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B5F3BEA268F286A00222100 /* NSManagedObjectContext+Save.swift */; };
 		9BA67F46268A044500B7597F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BA67F45268A044500B7597F /* AppDelegate.swift */; };
 		9BA67F48268A044500B7597F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BA67F47268A044500B7597F /* SceneDelegate.swift */; };
 		9BA67F4A268A044500B7597F /* StickerSetsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BA67F49268A044500B7597F /* StickerSetsViewController.swift */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9B5F3BEA268F286A00222100 /* NSManagedObjectContext+Save.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSManagedObjectContext+Save.swift"; sourceTree = "<group>"; };
 		9BA67F42268A044500B7597F /* Telegram-Memoji.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Telegram-Memoji.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BA67F45268A044500B7597F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9BA67F47268A044500B7597F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -99,6 +101,7 @@
 			isa = PBXGroup;
 			children = (
 				9BCF9707268C6E6B00D7FD6D /* UITextInputMode+Emoji.swift */,
+				9B5F3BEA268F286A00222100 /* NSManagedObjectContext+Save.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -173,6 +176,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9B5F3BEB268F286A00222100 /* NSManagedObjectContext+Save.swift in Sources */,
 				9BA67F4A268A044500B7597F /* StickerSetsViewController.swift in Sources */,
 				9BA67F50268A044500B7597F /* Telegram_Memoji.xcdatamodeld in Sources */,
 				9BA67F46268A044500B7597F /* AppDelegate.swift in Sources */,

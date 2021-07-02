@@ -8,19 +8,23 @@
 import UIKit
 
 final class StickerCollectionViewController: UICollectionViewController {
-    var stickerSet: StickerSet?    
+    var stickerSet: StickerSet?
     
     private var cellSize = CGSize.zero
-    private lazy var shouldPresentStickerInput
-        = (stickerSet?.stickers?.count == 0)
+    private lazy var shouldPresentStickerPicker = (stickerSet == nil)
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        if shouldPresentStickerInput {
+        if shouldPresentStickerPicker {
             presentStickerInputViewController()
-            shouldPresentStickerInput = false
+            shouldPresentStickerPicker = false
         }
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        Self.managedObjectContext.saveIfNeeded()
     }
     
     override func viewWillTransition(
@@ -51,8 +55,12 @@ extension StickerCollectionViewController {
                 .topViewController as? StickerInputViewController
         else { return }
         
-        stickerInputVC.context = stickerSet?.managedObjectContext
         stickerInputVC.configure {
+            if self.stickerSet == nil {
+                let context = Self.managedObjectContext
+                self.stickerSet = StickerSet(context: context)
+            }
+            
             self.stickerSet?.editDate = Date()
             self.stickerSet?.addToStickers($0)
             self.collectionView.reloadData()
