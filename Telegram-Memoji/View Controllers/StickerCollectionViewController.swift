@@ -9,7 +9,19 @@ import UIKit
 
 final class StickerCollectionViewController: UICollectionViewController {
     var stickerSet: StickerSet?    
+    
     private var cellSize = CGSize.zero
+    private lazy var shouldPresentStickerInput
+        = (stickerSet?.stickers?.count == 0)
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if shouldPresentStickerInput {
+            presentStickerInputViewController()
+            shouldPresentStickerInput = false
+        }
+    }
     
     override func viewWillTransition(
         to size: CGSize, with coordinator:
@@ -22,6 +34,38 @@ final class StickerCollectionViewController: UICollectionViewController {
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         cellSize = calculateCellSize()
+    }
+}
+
+// MARK: - Performing a Segue
+
+extension StickerCollectionViewController {
+    private static let segueIdentifier = "PresentStickerInputViewControllerSegue"
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard
+            segue.identifier == Self.segueIdentifier,
+            let destinationNavigationController =
+                segue.destination as? UINavigationController,
+            let stickerInputVC = destinationNavigationController
+                .topViewController as? StickerInputViewController
+        else { return }
+        
+        stickerInputVC.context = stickerSet?.managedObjectContext
+        stickerInputVC.configure {
+            self.stickerSet?.editDate = Date()
+            self.stickerSet?.addToStickers($0)
+            self.collectionView.reloadData()
+        }
+    }
+    
+    private func presentStickerInputViewController() {
+        if UITextInputMode.isEmojiEnabled {
+            performSegue(withIdentifier: Self.segueIdentifier, sender: nil)
+        } else {
+            // TODO: Replace preconditionFailure with an alert
+            preconditionFailure("Emoji keyboard is not enabled.")
+        }
     }
 }
 

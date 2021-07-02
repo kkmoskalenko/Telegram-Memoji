@@ -6,20 +6,42 @@
 //
 
 import UIKit
+import CoreData
 
 final class StickerInputViewController: UIViewController {
-    private var _canResignFirstResponder = false
+    var context: NSManagedObjectContext!
     
+    private var _canResignFirstResponder = false
     private var stickerImage: UIImage? {
         didSet {
-            if let image = stickerImage {
-                print(image.description)
-            }
+            imageView.image = stickerImage
+            navigationItem.rightBarButtonItem?
+                .isEnabled = stickerImage != nil
         }
     }
     
+    // MARK: Sticker Handler
+    
+    typealias StickerHandler = (Sticker) -> Void
+    private var stickerHandler: StickerHandler?
+    
+    func configure(_ handler: StickerHandler?) {
+        stickerHandler = handler
+    }
+    
+    // MARK: IB Outlets
+    
+    @IBOutlet private var imageView: UIImageView!
+}
+
+// MARK: - View Life Cycle
+
+extension StickerInputViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        navigationController?.navigationBar.isTranslucent = false
+        navigationController?.navigationBar.shadowImage = UIImage()
         
         pasteConfiguration = UIPasteConfiguration(
             forAccepting: UIImage.self)
@@ -116,6 +138,29 @@ extension StickerInputViewController {
         
         DispatchQueue.main.async { [weak self] in
             self?.reloadInputViews()
+        }
+    }
+    
+    @IBAction func cancelButtonAction(_ sender: UIBarButtonItem) {
+        dismiss(animated: true)
+    }
+    
+    @IBAction func doneButtonAction(_ sender: UIBarButtonItem) {
+        if let image = stickerImage {
+            let sticker = Sticker(context: context)
+            sticker.imageData = image.pngData()
+            sticker.emojis = ""
+            stickerHandler?(sticker)
+        }
+        
+        dismiss(animated: true)
+    }
+    
+    @IBAction func showKeyboardButtonAction(_ sender: UIButton) {
+        if isFirstResponder {
+            reloadInputViews()
+        } else {
+            becomeFirstResponder()
         }
     }
 }
