@@ -114,6 +114,27 @@ extension StickerCollectionViewController {
         
         return cell
     }
+    
+    override func collectionView(
+        _ collectionView: UICollectionView,
+        canMoveItemAt indexPath: IndexPath
+    ) -> Bool { indexPath.item != 0 }
+    
+    override func collectionView(
+        _ collectionView: UICollectionView,
+        moveItemAt sourceIndexPath: IndexPath,
+        to destinationIndexPath: IndexPath
+    ) {
+        let sourceIndex = sourceIndexPath.item - 1
+        let destinationIndex = destinationIndexPath.item - 1
+        
+        if let sticker = stickerSet?.stickers?
+            .object(at: sourceIndex) as? Sticker
+        {
+            stickerSet?.removeFromStickers(at: sourceIndex)
+            stickerSet?.insertIntoStickers(sticker, at: destinationIndex)
+        }
+    }
 }
 
 // MARK: - UICollectionViewDelegate
@@ -125,6 +146,15 @@ extension StickerCollectionViewController {
     ) {
         guard indexPath.item == 0 else { return }
         presentStickerInputViewController()
+    }
+    
+    override func collectionView(
+        _ collectionView: UICollectionView,
+        targetIndexPathForMoveFromItemAt originalIndexPath: IndexPath,
+        toProposedIndexPath proposedIndexPath: IndexPath
+    ) -> IndexPath {
+        proposedIndexPath.item == 0 ?
+            originalIndexPath : proposedIndexPath
     }
 }
 
