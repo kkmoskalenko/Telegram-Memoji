@@ -13,11 +13,15 @@ final class StickerCollectionViewController: UICollectionViewController {
     private var cellSize = CGSize.zero
     private lazy var shouldPresentStickerPicker = (stickerSet == nil)
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        navigationItem.rightBarButtonItem = editButtonItem
-    }
+    // MARK: IB Outlets
     
+    @IBOutlet private var newStickerButton: UIButton!
+    @IBOutlet private var uploadButton: UIBarButtonItem!
+}
+
+// MARK: - UIViewController Overrides
+
+extension StickerCollectionViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
@@ -25,6 +29,17 @@ final class StickerCollectionViewController: UICollectionViewController {
             presentStickerInputViewController()
             shouldPresentStickerPicker = false
         }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.isToolbarHidden = false
+        configureToolbarItems()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.isToolbarHidden = true
     }
     
     override func viewWillTransition(
@@ -42,11 +57,19 @@ final class StickerCollectionViewController: UICollectionViewController {
     
     override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
+        
+        navigationItem.setHidesBackButton(editing, animated: false)
+        navigationController?.navigationBar.setNeedsLayout()
+        
+        newStickerButton.isEnabled = !editing
+        uploadButton.isEnabled = !editing
+        
         collectionView.visibleCells.forEach {
             if let cell = $0 as? StickerImageCell {
                 cell.setEditing(editing, animated: animated)
             }
         }
+        
         if !editing {
             Self.managedObjectContext.saveIfNeeded()
         }
@@ -81,7 +104,7 @@ extension StickerCollectionViewController {
         }
     }
     
-    private func presentStickerInputViewController() {
+    @objc private func presentStickerInputViewController() {
         if UITextInputMode.isEmojiEnabled {
             performSegue(withIdentifier: Self.segueIdentifier, sender: nil)
         } else {
@@ -95,21 +118,6 @@ extension StickerCollectionViewController {
 
 extension StickerCollectionViewController {
     private static let stickerCellReuseIdentifier = "StickerCell"
-    
-    @objc private func deleteSticker(_ sender: UIButton) {
-        guard let cell = sender.superview?.superview as? StickerImageCell,
-              let indexPath = collectionView.indexPath(for: cell)
-        else { return }
-        
-        if let sticker = stickerSet?.stickers?
-            .object(at: indexPath.item) as? Sticker
-        {
-            stickerSet?.removeFromStickers(sticker)
-            Self.managedObjectContext.delete(sticker)
-            
-            collectionView.deleteItems(at: [indexPath])
-        }
-    }
     
     override func collectionView(
         _ collectionView: UICollectionView,
@@ -201,6 +209,42 @@ extension StickerCollectionViewController: UICollectionViewDelegateFlowLayout {
         layout collectionViewLayout: UICollectionViewLayout,
         minimumLineSpacingForSectionAt section: Int
     ) -> CGFloat { Self.cellSpacing }
+}
+
+// MARK: - Helper Methods
+
+extension StickerCollectionViewController {
+    private func configureToolbarItems() {
+        if let font = newStickerButton.titleLabel?.font,
+           let descriptor = font.fontDescriptor.withDesign(.rounded)
+        {
+            newStickerButton.titleLabel?.font = UIFont(
+                descriptor: descriptor, size: font.pointSize)
+        }
+        
+        let action = #selector(presentStickerInputViewController)
+        newStickerButton.addTarget(self, action: action, for: .touchUpInside)
+        
+        let button = UIBarButtonItem(customView: newStickerButton)
+        let spacer = UIBarButtonItem(systemItem: .flexibleSpace)
+        
+        setToolbarItems([button, spacer, editButtonItem], animated: false)
+    }
+    
+    @objc private func deleteSticker(_ sender: UIButton) {
+        guard let cell = sender.superview?.superview as? StickerImageCell,
+              let indexPath = collectionView.indexPath(for: cell)
+        else { return }
+        
+        if let sticker = stickerSet?.stickers?
+            .object(at: indexPath.item) as? Sticker
+        {
+            stickerSet?.removeFromStickers(sticker)
+            Self.managedObjectContext.delete(sticker)
+            
+            collectionView.deleteItems(at: [indexPath])
+        }
+    }
 }
 
 // MARK: - Collection View Cells
