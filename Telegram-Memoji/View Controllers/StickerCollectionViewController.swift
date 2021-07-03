@@ -95,16 +95,14 @@ extension StickerCollectionViewController {
 
 extension StickerCollectionViewController {
     private static let stickerCellReuseIdentifier = "StickerCell"
-    private static let addButtonReuseIdentifier = "AddButtonCell"
     
     @objc private func deleteSticker(_ sender: UIButton) {
         guard let cell = sender.superview?.superview as? StickerImageCell,
               let indexPath = collectionView.indexPath(for: cell)
         else { return }
         
-        let index = indexPath.item - 1
         if let sticker = stickerSet?.stickers?
-            .object(at: index) as? Sticker
+            .object(at: indexPath.item) as? Sticker
         {
             stickerSet?.removeFromStickers(sticker)
             Self.managedObjectContext.delete(sticker)
@@ -117,27 +115,19 @@ extension StickerCollectionViewController {
         _ collectionView: UICollectionView,
         numberOfItemsInSection section: Int
     ) -> Int {
-        let stickerCount = stickerSet?.stickers?.count
-        return (stickerCount ?? 0) + 1
+        stickerSet?.stickers?.count ?? 0
     }
     
     override func collectionView(
         _ collectionView: UICollectionView,
         cellForItemAt indexPath: IndexPath
     ) -> UICollectionViewCell {
-        if indexPath.item == 0 {
-            let cell = collectionView.dequeueReusableCell(
-                withReuseIdentifier: Self.addButtonReuseIdentifier,
-                for: indexPath) as! AddButtonCell
-            return cell
-        }
-        
         let cell = collectionView.dequeueReusableCell(
             withReuseIdentifier: Self.stickerCellReuseIdentifier,
             for: indexPath) as! StickerImageCell
         
         if let sticker = stickerSet?.stickers?
-            .object(at: indexPath.item - 1) as? Sticker,
+            .object(at: indexPath.item) as? Sticker,
            let imageData = sticker.imageData,
            let image = UIImage(data: imageData)
         {
@@ -154,43 +144,19 @@ extension StickerCollectionViewController {
     override func collectionView(
         _ collectionView: UICollectionView,
         canMoveItemAt indexPath: IndexPath
-    ) -> Bool { isEditing && (indexPath.item != 0) }
+    ) -> Bool { isEditing }
     
     override func collectionView(
         _ collectionView: UICollectionView,
         moveItemAt sourceIndexPath: IndexPath,
         to destinationIndexPath: IndexPath
     ) {
-        let sourceIndex = sourceIndexPath.item - 1
-        let destinationIndex = destinationIndexPath.item - 1
-        
-        if let sticker = stickerSet?.stickers?
-            .object(at: sourceIndex) as? Sticker
+        if let sticker = stickerSet?.stickers?.object(
+            at: sourceIndexPath.item) as? Sticker
         {
-            stickerSet?.removeFromStickers(at: sourceIndex)
-            stickerSet?.insertIntoStickers(sticker, at: destinationIndex)
+            stickerSet?.removeFromStickers(at: sourceIndexPath.item)
+            stickerSet?.insertIntoStickers(sticker, at: destinationIndexPath.item)
         }
-    }
-}
-
-// MARK: - UICollectionViewDelegate
-
-extension StickerCollectionViewController {
-    override func collectionView(
-        _ collectionView: UICollectionView,
-        didSelectItemAt indexPath: IndexPath
-    ) {
-        guard indexPath.item == 0 else { return }
-        presentStickerInputViewController()
-    }
-    
-    override func collectionView(
-        _ collectionView: UICollectionView,
-        targetIndexPathForMoveFromItemAt originalIndexPath: IndexPath,
-        toProposedIndexPath proposedIndexPath: IndexPath
-    ) -> IndexPath {
-        proposedIndexPath.item == 0 ?
-            originalIndexPath : proposedIndexPath
     }
 }
 
@@ -252,54 +218,5 @@ final class StickerImageCell: UICollectionViewCell {
             options: .transitionCrossDissolve,
             animations: animations
         ) } else { animations() }
-    }
-}
-
-final class AddButtonCell: UICollectionViewCell {
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        
-        layer.masksToBounds = true
-        layer.backgroundColor = tintColor
-            .withAlphaComponent(0.15).cgColor
-        layer.borderColor = tintColor
-            .withAlphaComponent(0.25).cgColor
-        layer.borderWidth = 1
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-        layer.cornerRadius = 0.5 * bounds.width
-    }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesBegan(touches, with: event)
-        
-        alpha = 1
-        UIView.animate(
-            withDuration: 0.35, delay: 0,
-            options: .curveLinear
-        ) { self.alpha = 0.5 }
-    }
-    
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesEnded(touches, with: event)
-        
-        alpha = 0.5
-        UIView.animate(
-            withDuration: 0.35, delay: 0,
-            options: .curveLinear
-        ) { self.alpha = 1 }
-    }
-    
-    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-        super.touchesCancelled(touches, with: event)
-        
-        alpha = 0.5
-        UIView.animate(
-            withDuration: 0.35, delay: 0,
-            options: .curveLinear
-        ) { self.alpha = 1 }
     }
 }
