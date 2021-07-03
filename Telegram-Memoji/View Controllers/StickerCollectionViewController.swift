@@ -13,6 +13,14 @@ final class StickerCollectionViewController: UICollectionViewController {
     private var cellSize = CGSize.zero
     private lazy var shouldPresentStickerPicker = (stickerSet == nil)
     
+    private lazy var emptyLabel: UILabel = {
+        let label = UILabel()
+        label.text = "No Stickers"
+        label.textColor = .tertiaryLabel
+        label.textAlignment = .center
+        return label
+    }()
+    
     // MARK: IB Outlets
     
     @IBOutlet private var newStickerButton: UIButton!
@@ -53,6 +61,10 @@ extension StickerCollectionViewController {
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         cellSize = calculateCellSize()
+        
+        let stickerCount = stickerSet?.stickers?.count ?? 0
+        collectionView.backgroundView =
+            (stickerCount == 0) ? emptyLabel : nil
     }
     
     override func setEditing(_ editing: Bool, animated: Bool) {
