@@ -13,6 +13,11 @@ final class StickerCollectionViewController: UICollectionViewController {
     private var cellSize = CGSize.zero
     private lazy var shouldPresentStickerPicker = (stickerSet == nil)
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        navigationItem.rightBarButtonItem = editButtonItem
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
@@ -20,11 +25,6 @@ final class StickerCollectionViewController: UICollectionViewController {
             presentStickerInputViewController()
             shouldPresentStickerPicker = false
         }
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        Self.managedObjectContext.saveIfNeeded()
     }
     
     override func viewWillTransition(
@@ -38,6 +38,18 @@ final class StickerCollectionViewController: UICollectionViewController {
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         cellSize = calculateCellSize()
+    }
+    
+    override func setEditing(_ editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+        collectionView.visibleCells.forEach {
+            if let cell = $0 as? StickerImageCell {
+                cell.setEditing(editing, animated: animated)
+            }
+        }
+        if !editing {
+            Self.managedObjectContext.saveIfNeeded()
+        }
     }
 }
 
@@ -64,6 +76,8 @@ extension StickerCollectionViewController {
             self.stickerSet?.editDate = Date()
             self.stickerSet?.addToStickers($0)
             self.collectionView.reloadData()
+            
+            Self.managedObjectContext.saveIfNeeded()
         }
     }
     
@@ -82,6 +96,22 @@ extension StickerCollectionViewController {
 extension StickerCollectionViewController {
     private static let stickerCellReuseIdentifier = "StickerCell"
     private static let addButtonReuseIdentifier = "AddButtonCell"
+    
+    @objc private func deleteSticker(_ sender: UIButton) {
+        guard let cell = sender.superview?.superview as? StickerImageCell,
+              let indexPath = collectionView.indexPath(for: cell)
+        else { return }
+        
+        let index = indexPath.item - 1
+        if let sticker = stickerSet?.stickers?
+            .object(at: index) as? Sticker
+        {
+            stickerSet?.removeFromStickers(sticker)
+            Self.managedObjectContext.delete(sticker)
+            
+            collectionView.deleteItems(at: [indexPath])
+        }
+    }
     
     override func collectionView(
         _ collectionView: UICollectionView,
@@ -110,7 +140,13 @@ extension StickerCollectionViewController {
             .object(at: indexPath.item - 1) as? Sticker,
            let imageData = sticker.imageData,
            let image = UIImage(data: imageData)
-        { cell.imageView.image = image }
+        {
+            cell.imageView.image = image
+            cell.setEditing(isEditing, animated: false)
+            cell.deleteButton.addTarget(
+                self, action: #selector(deleteSticker),
+                for: .touchUpInside)
+        }
         
         return cell
     }
@@ -118,7 +154,7 @@ extension StickerCollectionViewController {
     override func collectionView(
         _ collectionView: UICollectionView,
         canMoveItemAt indexPath: IndexPath
-    ) -> Bool { indexPath.item != 0 }
+    ) -> Bool { isEditing && (indexPath.item != 0) }
     
     override func collectionView(
         _ collectionView: UICollectionView,
@@ -205,6 +241,18 @@ extension StickerCollectionViewController: UICollectionViewDelegateFlowLayout {
 
 final class StickerImageCell: UICollectionViewCell {
     @IBOutlet var imageView: UIImageView!
+    @IBOutlet var deleteButton: UIButton!
+    
+    func setEditing(_ editing: Bool, animated: Bool) {
+        let animations = { self.deleteButton.isHidden = !editing }
+        if editing { startShaking() } else { stopShaking() }
+        
+        if animated { UIView.transition(
+            with: self, duration: 0.2,
+            options: .transitionCrossDissolve,
+            animations: animations
+        ) } else { animations() }
+    }
 }
 
 final class AddButtonCell: UICollectionViewCell {

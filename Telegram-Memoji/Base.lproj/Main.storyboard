@@ -3,6 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
@@ -110,31 +111,41 @@
                                     </constraints>
                                 </collectionViewCellContentView>
                             </collectionViewCell>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="StickerCell" id="th2-20-Mdm" customClass="StickerImageCell" customModule="Telegram_Memoji" customModuleProvider="target">
+                            <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="StickerCell" id="th2-20-Mdm" customClass="StickerImageCell" customModule="Telegram_Memoji" customModuleProvider="target">
                                 <rect key="frame" x="149" y="16" width="116" height="116"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Ri0-k5-QBo">
+                                <collectionViewCellContentView key="contentView" opaque="NO" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Ri0-k5-QBo">
                                     <rect key="frame" x="0.0" y="0.0" width="116" height="116"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hG9-vV-Ep2">
                                             <rect key="frame" x="0.0" y="0.0" width="116" height="116"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                    <integer key="value" value="11"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
                                         </imageView>
+                                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vac-mh-GtW">
+                                            <rect key="frame" x="-7.5" y="-7" width="25" height="24"/>
+                                            <color key="tintColor" systemColor="systemRedColor"/>
+                                            <state key="normal">
+                                                <imageReference key="image" image="minus.circle.fill" catalog="system" symbolScale="large"/>
+                                            </state>
+                                        </button>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstItem="Vac-mh-GtW" firstAttribute="centerX" secondItem="Ri0-k5-QBo" secondAttribute="leading" constant="5" id="L1u-KO-kPu"/>
                                         <constraint firstAttribute="bottom" secondItem="hG9-vV-Ep2" secondAttribute="bottom" id="LnF-i3-AQh"/>
+                                        <constraint firstItem="Vac-mh-GtW" firstAttribute="centerY" secondItem="Ri0-k5-QBo" secondAttribute="top" constant="5" id="NhE-iL-HeK"/>
                                         <constraint firstItem="hG9-vV-Ep2" firstAttribute="leading" secondItem="Ri0-k5-QBo" secondAttribute="leading" id="SwQ-Pc-O0T"/>
                                         <constraint firstAttribute="trailing" secondItem="hG9-vV-Ep2" secondAttribute="trailing" id="i0P-YJ-A7c"/>
                                         <constraint firstItem="hG9-vV-Ep2" firstAttribute="top" secondItem="Ri0-k5-QBo" secondAttribute="top" id="xgV-A9-Huw"/>
                                     </constraints>
                                 </collectionViewCellContentView>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="11"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
                                 <connections>
+                                    <outlet property="deleteButton" destination="Vac-mh-GtW" id="fKM-tB-1fx"/>
                                     <outlet property="imageView" destination="hG9-vV-Ep2" id="eXw-fM-rP9"/>
                                 </connections>
                             </collectionViewCell>
@@ -230,12 +241,16 @@
         </scene>
     </scenes>
     <resources>
+        <image name="minus.circle.fill" catalog="system" width="128" height="121"/>
         <image name="plus" catalog="system" width="128" height="113"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemFillColor">
             <color red="0.47058823529411764" green="0.47058823529411764" blue="0.50196078431372548" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
