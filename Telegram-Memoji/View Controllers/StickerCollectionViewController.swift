@@ -98,7 +98,12 @@ extension StickerCollectionViewController {
             
             self.stickerSet?.editDate = Date()
             self.stickerSet?.addToStickers($0)
-            self.collectionView.reloadData()
+            
+            if let index = self.stickerSet?.stickers?.index(of: $0) {
+                self.collectionView.insertItems(at: [
+                    IndexPath(item: index, section: 0)
+                ])
+            }
             
             Self.managedObjectContext.saveIfNeeded()
         }
@@ -141,9 +146,10 @@ extension StickerCollectionViewController {
         {
             cell.imageView.image = image
             cell.setEditing(isEditing, animated: false)
+            
+            let action = #selector(deleteSticker(_:))
             cell.deleteButton.addTarget(
-                self, action: #selector(deleteSticker),
-                for: .touchUpInside)
+                self, action: action, for: .touchUpInside)
         }
         
         return cell
@@ -165,6 +171,39 @@ extension StickerCollectionViewController {
             stickerSet?.removeFromStickers(at: sourceIndexPath.item)
             stickerSet?.insertIntoStickers(sticker, at: destinationIndexPath.item)
         }
+    }
+}
+
+// MARK: - UICollectionViewDelegate
+
+extension StickerCollectionViewController {
+    override func collectionView(
+        _ collectionView: UICollectionView,
+        contextMenuConfigurationForItemAt indexPath: IndexPath,
+        point: CGPoint) -> UIContextMenuConfiguration?
+    {
+        guard !isEditing else { return nil }
+        
+        if let sticker = stickerSet?.stickers?
+            .object(at: indexPath.item) as? Sticker
+        {
+            let emoji = sticker.emojis?.prefix(1).appending(" ")
+            return UIContextMenuConfiguration(
+                identifier: nil, previewProvider: nil
+            ) { _ in
+                UIMenu(title: (emoji ?? "") + "Sticker", children: [
+                    UIAction(title: "Reorder Stickers", image: UIImage(
+                        systemName: "arrow.up.arrow.down"
+                    )) { _ in self.setEditing(true, animated: true) },
+                    UIAction(title: "Remove from Set",
+                             image: UIImage(systemName: "trash"),
+                             attributes: .destructive
+                    ) { _ in self.deleteSticker(at: indexPath) }
+                ])
+            }
+        }
+        
+        return UIContextMenuConfiguration()
     }
 }
 
@@ -231,11 +270,7 @@ extension StickerCollectionViewController {
         setToolbarItems([button, spacer, editButtonItem], animated: false)
     }
     
-    @objc private func deleteSticker(_ sender: UIButton) {
-        guard let cell = sender.superview?.superview as? StickerImageCell,
-              let indexPath = collectionView.indexPath(for: cell)
-        else { return }
-        
+    private func deleteSticker(at indexPath: IndexPath) {
         if let sticker = stickerSet?.stickers?
             .object(at: indexPath.item) as? Sticker
         {
@@ -244,6 +279,19 @@ extension StickerCollectionViewController {
             
             collectionView.deleteItems(at: [indexPath])
         }
+        
+        if let stickerSet = stickerSet,
+           (stickerSet.stickers?.count ?? 0) == 0
+        {
+            Self.managedObjectContext.delete(stickerSet)
+            self.stickerSet = nil
+        }
+    }
+    
+    @objc private func deleteSticker(_ sender: UIButton) {
+        if let cell = sender.superview?.superview as? StickerImageCell,
+           let indexPath = collectionView.indexPath(for: cell)
+        { deleteSticker(at: indexPath) }
     }
 }
 
