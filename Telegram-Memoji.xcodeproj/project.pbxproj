@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -22,6 +22,7 @@
 		9BF60EA52691607100E0C5C3 /* Keyboard+LayoutGuide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF60EA42691607100E0C5C3 /* Keyboard+LayoutGuide.swift */; };
 		9BF60EA92691A4A000E0C5C3 /* EmojiLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF60EA82691A4A000E0C5C3 /* EmojiLabel.swift */; };
 		9BF60EAD2691BC6E00E0C5C3 /* String+Emoji.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF60EAC2691BC6E00E0C5C3 /* String+Emoji.swift */; };
+		9BF60EB02691C3C500E0C5C3 /* TelegramStickersImport in Frameworks */ = {isa = PBXBuildFile; productRef = 9BF60EAF2691C3C500E0C5C3 /* TelegramStickersImport */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +50,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9BF60EB02691C3C500E0C5C3 /* TelegramStickersImport in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -142,6 +144,9 @@
 			dependencies = (
 			);
 			name = "Telegram-Memoji";
+			packageProductDependencies = (
+				9BF60EAF2691C3C500E0C5C3 /* TelegramStickersImport */,
+			);
 			productName = "Telegram-Memoji";
 			productReference = 9BA67F42268A044500B7597F /* Telegram-Memoji.app */;
 			productType = "com.apple.product-type.application";
@@ -169,6 +174,9 @@
 				Base,
 			);
 			mainGroup = 9BA67F39268A044500B7597F;
+			packageReferences = (
+				9BF60EAE2691C3C500E0C5C3 /* XCRemoteSwiftPackageReference "TelegramStickersImport" */,
+			);
 			productRefGroup = 9BA67F43268A044500B7597F /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -407,6 +415,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		9BF60EAE2691C3C500E0C5C3 /* XCRemoteSwiftPackageReference "TelegramStickersImport" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/TelegramMessenger/TelegramStickersImport.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		9BF60EAF2691C3C500E0C5C3 /* TelegramStickersImport */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9BF60EAE2691C3C500E0C5C3 /* XCRemoteSwiftPackageReference "TelegramStickersImport" */;
+			productName = TelegramStickersImport;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		9BA67F4E268A044500B7597F /* Telegram_Memoji.xcdatamodeld */ = {
