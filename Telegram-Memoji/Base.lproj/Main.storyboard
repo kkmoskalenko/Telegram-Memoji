@@ -137,7 +137,11 @@
                         </connections>
                     </collectionView>
                     <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="q7A-1q-OFK">
-                        <barButtonItem key="rightBarButtonItem" title="Upload" style="done" id="g8k-lJ-fdU"/>
+                        <barButtonItem key="rightBarButtonItem" title="Upload" style="done" id="g8k-lJ-fdU">
+                            <connections>
+                                <action selector="uploadStickers:" destination="5XT-6l-lYy" id="nVV-eg-GHE"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>

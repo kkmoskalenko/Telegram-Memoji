@@ -125,17 +125,13 @@ extension StickerCollectionViewController {
         if UITextInputMode.isEmojiEnabled {
             performSegue(withIdentifier: Self.segueIdentifier, sender: nil)
         } else {
-            let alertController = UIAlertController(
+            presentAlertController(
                 title: "Turn on the emoji keyboard",
                 message: """
                     1. Go to Settings > General and tap Keyboard.
                     2. Tap Keyboards, then tap Add New Keyboard.
                     3. Tap Emoji.
-                    """,
-                preferredStyle: .alert)
-            alertController.addAction(
-                UIAlertAction(title: "OK", style: .cancel))
-            present(alertController, animated: true)
+                    """)
         }
     }
 }
@@ -291,6 +287,14 @@ extension StickerCollectionViewController {
         setToolbarItems([button, spacer, editButtonItem], animated: false)
     }
     
+    private func presentAlertController(title: String, message: String) {
+        let alertController = UIAlertController(
+            title: title, message: message, preferredStyle: .alert)
+        alertController.addAction(
+            UIAlertAction(title: "OK", style: .cancel))
+        present(alertController, animated: true)
+    }
+    
     private func deleteSticker(at indexPath: IndexPath) {
         if let sticker = stickerSet?.stickers?
             .object(at: indexPath.item) as? Sticker
@@ -313,6 +317,27 @@ extension StickerCollectionViewController {
         if let cell = sender.superview?.superview as? StickerImageCell,
            let indexPath = collectionView.indexPath(for: cell)
         { deleteSticker(at: indexPath) }
+    }
+    
+    @IBAction private func uploadStickers(_ sender: UIBarButtonItem) {
+        let alert = { (message: String) in self.presentAlertController(
+            title: "Failed to upload the stickers", message: message
+        ) }
+        
+        guard let stickerSet = stickerSet else {
+            alert(StickersError.setIsEmpty.message)
+            return
+        }
+        
+        do {
+            try stickerSet.importToTelegram()
+        } catch {
+            if let error = error as? StickersError {
+                alert(error.message)
+            } else {
+                alert("An unknown error has occurred.")
+            }
+        }
     }
 }
 
