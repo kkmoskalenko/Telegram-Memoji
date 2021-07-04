@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="18154" systemVersion="20F71" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Sticker" representedClassName="Sticker" syncable="YES" codeGenerationType="class">
-        <attribute name="emojis" attributeType="String"/>
+        <attribute name="emojis" attributeType="String" minValueString="1"/>
         <attribute name="imageData" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
         <relationship name="stickerSet" maxCount="1" deletionRule="Nullify" destinationEntity="StickerSet" inverseName="stickers" inverseEntity="StickerSet"/>
     </entity>
@@ -11,7 +11,7 @@
         <relationship name="stickers" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="Sticker" inverseName="stickerSet" inverseEntity="Sticker"/>
     </entity>
     <elements>
-        <element name="Sticker" positionX="200" positionY="0" width="128" height="88"/>
+        <element name="Sticker" positionX="200" positionY="0" width="128" height="74"/>
         <element name="StickerSet" positionX="0" positionY="0" width="128" height="88"/>
     </elements>
 </model>

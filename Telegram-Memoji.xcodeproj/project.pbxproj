@@ -21,6 +21,7 @@
 		9BE360A2268C845C003C4370 /* StickerCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BE360A1268C845C003C4370 /* StickerCollectionViewController.swift */; };
 		9BF60EA52691607100E0C5C3 /* Keyboard+LayoutGuide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF60EA42691607100E0C5C3 /* Keyboard+LayoutGuide.swift */; };
 		9BF60EA92691A4A000E0C5C3 /* EmojiLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF60EA82691A4A000E0C5C3 /* EmojiLabel.swift */; };
+		9BF60EAD2691BC6E00E0C5C3 /* String+Emoji.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF60EAC2691BC6E00E0C5C3 /* String+Emoji.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		9BE360A1268C845C003C4370 /* StickerCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerCollectionViewController.swift; sourceTree = "<group>"; };
 		9BF60EA42691607100E0C5C3 /* Keyboard+LayoutGuide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Keyboard+LayoutGuide.swift"; sourceTree = "<group>"; };
 		9BF60EA82691A4A000E0C5C3 /* EmojiLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiLabel.swift; sourceTree = "<group>"; };
+		9BF60EAC2691BC6E00E0C5C3 /* String+Emoji.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Emoji.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +109,7 @@
 		9BCF9706268C6E4300D7FD6D /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				9BF60EAC2691BC6E00E0C5C3 /* String+Emoji.swift */,
 				9BCF9707268C6E6B00D7FD6D /* UITextInputMode+Emoji.swift */,
 				9B1255F526903C3F0052C742 /* UIView+Shake.swift */,
 				9BF60EA42691607100E0C5C3 /* Keyboard+LayoutGuide.swift */,
@@ -196,6 +199,7 @@
 				9B1255F626903C3F0052C742 /* UIView+Shake.swift in Sources */,
 				9B5F3BEB268F286A00222100 /* NSManagedObjectContext+Save.swift in Sources */,
 				9BA67F4A268A044500B7597F /* StickerSetsViewController.swift in Sources */,
+				9BF60EAD2691BC6E00E0C5C3 /* String+Emoji.swift in Sources */,
 				9BA67F50268A044500B7597F /* Telegram_Memoji.xcdatamodeld in Sources */,
 				9BF60EA92691A4A000E0C5C3 /* EmojiLabel.swift in Sources */,
 				9BA67F46268A044500B7597F /* AppDelegate.swift in Sources */,

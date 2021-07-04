@@ -12,9 +12,6 @@ final class StickerInputViewController: UIViewController {
     private var stickerImage: UIImage? {
         didSet {
             let hasImage = (stickerImage != nil)
-            navigationItem.rightBarButtonItem?
-                .isEnabled = hasImage
-            
             Self.selectionGenerator.selectionChanged()
             
             UIView.transition(with: view, duration: 0.2, options: [
@@ -107,18 +104,28 @@ extension StickerInputViewController {
 // MARK: - UIKeyInput
 
 extension StickerInputViewController: UIKeyInput {
+    private var inputValid: Bool {
+        hasText && (stickerImage != nil)
+    }
+    
     var hasText: Bool {
         emojiLabel.characterCount > 0
     }
     
     func insertText(_ text: String) {
         if !emojiInputView.isHidden,
+           text.containsOnlyEmoji,
            emojiLabel.characterCount < 5
         { emojiLabel.text?.append(text) }
+        
+        navigationItem.rightBarButtonItem?
+            .isEnabled = inputValid
     }
     
     func deleteBackward() {
         emojiLabel.text?.removeLast()
+        navigationItem.rightBarButtonItem?
+            .isEnabled = inputValid
     }
 }
 
@@ -196,7 +203,7 @@ extension StickerInputViewController {
             let context = Self.managedObjectContext
             let sticker = Sticker(context: context)
             sticker.imageData = image.pngData()
-            sticker.emojis = ""
+            sticker.emojis = emojiLabel.text
             stickerHandler?(sticker)
         }
         
