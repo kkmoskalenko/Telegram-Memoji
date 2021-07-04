@@ -52,7 +52,6 @@ extension StickerInputViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationController?.delegate = self
         pasteConfiguration = UIPasteConfiguration(
             forAccepting: UIImage.self)
         
@@ -73,10 +72,25 @@ extension StickerInputViewController {
         becomeFirstResponder()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        let appDelegate = UIApplication.shared.delegate as? AppDelegate
+        appDelegate?.orientationLock = .portrait
+        
+        let orientation = UIInterfaceOrientation.portrait.rawValue
+        UIDevice.current.setValue(orientation, forKey: "orientation")
+        UINavigationController.attemptRotationToDeviceOrientation()
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        
         _canResignFirstResponder = true
         resignFirstResponder()
+        
+        let appDelegate = UIApplication.shared.delegate as? AppDelegate
+        appDelegate?.orientationLock = .all
     }
     
     override func viewDidLayoutSubviews() {
@@ -156,19 +170,10 @@ extension StickerInputViewController {
     }
 }
 
-// MARK: - UINavigationControllerDelegate
-
-extension StickerInputViewController: UINavigationControllerDelegate {
-    func navigationControllerSupportedInterfaceOrientations(
-        _ navigationController: UINavigationController
-    ) -> UIInterfaceOrientationMask { .portrait }
-}
-
 // MARK: - Feedback Generators
 
 extension StickerInputViewController {
     private static let selectionGenerator = UISelectionFeedbackGenerator()
-    private static let notificationGenerator = UINotificationFeedbackGenerator()
 }
 
 // MARK: - Action Handlers
