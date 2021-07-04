@@ -165,32 +165,74 @@
             <objects>
                 <viewController id="mBa-9k-e18" customClass="StickerInputViewController" customModule="Telegram_Memoji" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="msB-Us-Ypr">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="It4-6C-Goe">
-                                <rect key="frame" x="103.5" y="104" width="207" height="207"/>
+                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="It4-6C-Goe">
+                                <rect key="frame" x="103.5" y="16" width="207" height="207"/>
                                 <color key="backgroundColor" systemColor="systemFillColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="It4-6C-Goe" secondAttribute="height" id="KSE-xG-UHl"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k6c-6w-j83">
-                                <rect key="frame" x="153.5" y="816" width="107" height="30"/>
+                                <rect key="frame" x="153.5" y="728" width="107" height="30"/>
                                 <state key="normal" title="Show Keyboard"/>
                                 <connections>
                                     <action selector="showKeyboardButtonAction:" destination="mBa-9k-e18" eventType="touchUpInside" id="D8J-nU-7hU"/>
                                 </connections>
                             </button>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="At7-l1-eVM">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="774"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="Keyboard" translatesAutoresizingMaskIntoConstraints="NO" id="ZXB-Q4-291" userLabel="Phone Image">
+                                        <rect key="frame" x="41.5" y="-333" width="331" height="626"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="400" id="8cR-r2-RJf"/>
+                                            <constraint firstAttribute="width" secondItem="ZXB-Q4-291" secondAttribute="height" multiplier="255:482" id="kE6-P5-xoR"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select a Memoji Sticker on the left of your emoji keyboard" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aD9-qm-ThG" userLabel="Title">
+                                        <rect key="frame" x="41.5" y="293" width="331" height="53"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="If you don't see the stickers, go to Settings &gt; General &gt; Keyboard and make sure that «Memoji Stickers» is enabled." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eTg-cu-xga" userLabel="Subtitle">
+                                        <rect key="frame" x="41.5" y="362" width="331" height="46.5"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                        <color key="textColor" systemColor="secondaryLabelColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="eTg-cu-xga" firstAttribute="top" secondItem="aD9-qm-ThG" secondAttribute="bottom" constant="16" id="6ye-5C-lZC"/>
+                                    <constraint firstItem="ZXB-Q4-291" firstAttribute="centerX" secondItem="5dB-86-X1F" secondAttribute="centerX" id="Gom-Ns-nA0"/>
+                                    <constraint firstItem="eTg-cu-xga" firstAttribute="trailing" secondItem="aD9-qm-ThG" secondAttribute="trailing" id="LNy-PE-JKX"/>
+                                    <constraint firstItem="aD9-qm-ThG" firstAttribute="top" secondItem="ZXB-Q4-291" secondAttribute="bottom" id="QqA-Gf-2Yc"/>
+                                    <constraint firstItem="ZXB-Q4-291" firstAttribute="centerX" secondItem="MvC-ER-vQ4" secondAttribute="centerX" id="UT4-no-mWd"/>
+                                    <constraint firstItem="aD9-qm-ThG" firstAttribute="leading" secondItem="ZXB-Q4-291" secondAttribute="leading" id="aSd-eI-PLJ"/>
+                                    <constraint firstItem="5dB-86-X1F" firstAttribute="bottom" secondItem="eTg-cu-xga" secondAttribute="bottom" constant="16" id="arB-F0-f32"/>
+                                    <constraint firstItem="eTg-cu-xga" firstAttribute="leading" secondItem="aD9-qm-ThG" secondAttribute="leading" id="bKt-DN-pA0"/>
+                                    <constraint firstItem="ZXB-Q4-291" firstAttribute="width" secondItem="MvC-ER-vQ4" secondAttribute="width" multiplier="0.8" priority="999" id="jbD-o9-Rxw"/>
+                                    <constraint firstItem="aD9-qm-ThG" firstAttribute="trailing" secondItem="ZXB-Q4-291" secondAttribute="trailing" id="o8J-ag-dZ8"/>
+                                    <constraint firstItem="ZXB-Q4-291" firstAttribute="centerY" secondItem="5dB-86-X1F" secondAttribute="top" constant="-20" id="qkg-g1-GG2"/>
+                                </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="5dB-86-X1F"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="MvC-ER-vQ4"/>
+                            </scrollView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ftf-YZ-epf"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="It4-6C-Goe" firstAttribute="width" secondItem="ftf-YZ-epf" secondAttribute="width" multiplier="0.5" id="LiL-hV-gMZ"/>
+                            <constraint firstItem="At7-l1-eVM" firstAttribute="bottom" secondItem="ftf-YZ-epf" secondAttribute="bottom" placeholder="YES" id="VXe-hl-vit"/>
+                            <constraint firstItem="At7-l1-eVM" firstAttribute="leading" secondItem="ftf-YZ-epf" secondAttribute="leading" id="YBT-jx-k60"/>
                             <constraint firstItem="k6c-6w-j83" firstAttribute="centerX" secondItem="msB-Us-Ypr" secondAttribute="centerX" id="aaa-6r-bUq"/>
                             <constraint firstItem="ftf-YZ-epf" firstAttribute="bottom" secondItem="k6c-6w-j83" secondAttribute="bottom" constant="16" id="hkr-1j-SJI"/>
                             <constraint firstItem="It4-6C-Goe" firstAttribute="centerX" secondItem="ftf-YZ-epf" secondAttribute="centerX" id="hv5-hg-yR6"/>
                             <constraint firstItem="It4-6C-Goe" firstAttribute="top" secondItem="ftf-YZ-epf" secondAttribute="top" constant="16" id="pu2-aB-wb4"/>
+                            <constraint firstItem="At7-l1-eVM" firstAttribute="top" secondItem="ftf-YZ-epf" secondAttribute="top" id="vfI-Cx-zRc"/>
+                            <constraint firstItem="ftf-YZ-epf" firstAttribute="trailing" secondItem="At7-l1-eVM" secondAttribute="trailing" id="yd1-Vp-dOz"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="1y3-IF-brH">
@@ -207,6 +249,8 @@
                     </navigationItem>
                     <connections>
                         <outlet property="imageView" destination="It4-6C-Goe" id="TZL-Xa-PZQ"/>
+                        <outlet property="keyboardTipsTitleLabel" destination="aD9-qm-ThG" id="kIZ-NY-xif"/>
+                        <outlet property="keyboardTipsView" destination="At7-l1-eVM" id="fjg-Yc-hLH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GfR-9z-UcJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -219,7 +263,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Zk5-xG-4r6" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="yVP-Ml-Hln"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Vor-fG-6Xw">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="Vor-fG-6Xw">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -237,8 +281,12 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Keyboard" width="1530" height="2892"/>
         <image name="minus.circle.fill" catalog="system" width="128" height="121"/>
         <image name="plus.circle.fill" catalog="system" width="128" height="121"/>
+        <systemColor name="secondaryLabelColor">
+            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

@@ -11,9 +11,19 @@ final class StickerInputViewController: UIViewController {
     private var _canResignFirstResponder = false
     private var stickerImage: UIImage? {
         didSet {
-            imageView.image = stickerImage
+            let hasImage = (stickerImage != nil)
             navigationItem.rightBarButtonItem?
-                .isEnabled = stickerImage != nil
+                .isEnabled = hasImage
+            
+            Self.selectionGenerator.selectionChanged()
+            
+            UIView.transition(with: view, duration: 0.2, options: [
+                .transitionCrossDissolve, .curveEaseOut
+            ]) {
+                self.keyboardTipsView.isHidden = hasImage
+                self.imageView.isHidden = !hasImage
+                self.imageView.image = self.stickerImage
+            }
         }
     }
     
@@ -29,6 +39,8 @@ final class StickerInputViewController: UIViewController {
     // MARK: IB Outlets
     
     @IBOutlet private var imageView: UIImageView!
+    @IBOutlet private var keyboardTipsView: UIScrollView!
+    @IBOutlet private var keyboardTipsTitleLabel: UILabel!
 }
 
 // MARK: - View Life Cycle
@@ -37,9 +49,7 @@ extension StickerInputViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationController?.navigationBar.isTranslucent = false
-        navigationController?.navigationBar.shadowImage = UIImage()
-        
+        navigationController?.delegate = self
         pasteConfiguration = UIPasteConfiguration(
             forAccepting: UIImage.self)
         
@@ -48,6 +58,10 @@ extension StickerInputViewController {
         NotificationCenter.default.addObserver(
             self, selector: #selector(inputModeDidChange),
             name: inputModeNotification, object: nil)
+        
+        keyboardTipsView.bottomAnchor.constraint(
+            equalTo: view.keyboardLayoutGuide.topAnchor
+        ).isActive = true
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -60,6 +74,14 @@ extension StickerInputViewController {
         super.viewWillDisappear(animated)
         _canResignFirstResponder = true
         resignFirstResponder()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        if !keyboardTipsView.isHidden {
+            let offset = keyboardTipsTitleLabel.frame.origin
+            keyboardTipsView.setContentOffset(offset, animated: true)
+        }
     }
     
     override var disablesAutomaticKeyboardDismissal: Bool { true }
@@ -125,6 +147,21 @@ extension StickerInputViewController {
             } }
         }
     }
+}
+
+// MARK: - UINavigationControllerDelegate
+
+extension StickerInputViewController: UINavigationControllerDelegate {
+    func navigationControllerSupportedInterfaceOrientations(
+        _ navigationController: UINavigationController
+    ) -> UIInterfaceOrientationMask { .portrait }
+}
+
+// MARK: - Feedback Generators
+
+extension StickerInputViewController {
+    private static let selectionGenerator = UISelectionFeedbackGenerator()
+    private static let notificationGenerator = UINotificationFeedbackGenerator()
 }
 
 // MARK: - Action Handlers
