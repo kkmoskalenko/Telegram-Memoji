@@ -125,8 +125,17 @@ extension StickerCollectionViewController {
         if UITextInputMode.isEmojiEnabled {
             performSegue(withIdentifier: Self.segueIdentifier, sender: nil)
         } else {
-            // TODO: Replace preconditionFailure with an alert
-            preconditionFailure("Emoji keyboard is not enabled.")
+            let alertController = UIAlertController(
+                title: "Turn on the emoji keyboard",
+                message: """
+                    1. Go to Settings > General and tap Keyboard.
+                    2. Tap Keyboards, then tap Add New Keyboard.
+                    3. Tap Emoji.
+                    """,
+                preferredStyle: .alert)
+            alertController.addAction(
+                UIAlertAction(title: "OK", style: .cancel))
+            present(alertController, animated: true)
         }
     }
 }
