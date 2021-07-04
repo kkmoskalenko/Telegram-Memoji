@@ -282,7 +282,8 @@ extension StickerCollectionViewController {
         newStickerButton.addTarget(self, action: action, for: .touchUpInside)
         
         let button = UIBarButtonItem(customView: newStickerButton)
-        let spacer = UIBarButtonItem(systemItem: .flexibleSpace)
+        let spacer = UIBarButtonItem(barButtonSystemItem: .flexibleSpace,
+                                     target: nil, action: nil)
         
         setToolbarItems([button, spacer, editButtonItem], animated: false)
     }
