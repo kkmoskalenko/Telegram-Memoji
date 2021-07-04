@@ -202,8 +202,14 @@ extension StickerInputViewController {
         if let image = stickerImage {
             let context = Self.managedObjectContext
             let sticker = Sticker(context: context)
-            sticker.imageData = image.pngData()
+            
+            let imagePngData = image.resize(
+                to: CGSize(width: 512, height: 512)
+            ).pngData()
+            
+            sticker.imageData = imagePngData
             sticker.emojis = emojiLabel.text
+            
             stickerHandler?(sticker)
         }
         

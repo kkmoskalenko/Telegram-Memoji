@@ -24,6 +24,7 @@
 		9BF60EAD2691BC6E00E0C5C3 /* String+Emoji.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF60EAC2691BC6E00E0C5C3 /* String+Emoji.swift */; };
 		9BF60EB02691C3C500E0C5C3 /* TelegramStickersImport in Frameworks */ = {isa = PBXBuildFile; productRef = 9BF60EAF2691C3C500E0C5C3 /* TelegramStickersImport */; };
 		9BF60EB22691C68A00E0C5C3 /* StickerSet+Import.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF60EB12691C68A00E0C5C3 /* StickerSet+Import.swift */; };
+		9BF60EB62691DD7D00E0C5C3 /* UIImage+Resize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF60EB52691DD7D00E0C5C3 /* UIImage+Resize.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +46,7 @@
 		9BF60EA82691A4A000E0C5C3 /* EmojiLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiLabel.swift; sourceTree = "<group>"; };
 		9BF60EAC2691BC6E00E0C5C3 /* String+Emoji.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Emoji.swift"; sourceTree = "<group>"; };
 		9BF60EB12691C68A00E0C5C3 /* StickerSet+Import.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StickerSet+Import.swift"; sourceTree = "<group>"; };
+		9BF60EB52691DD7D00E0C5C3 /* UIImage+Resize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Resize.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +118,7 @@
 				9BF60EAC2691BC6E00E0C5C3 /* String+Emoji.swift */,
 				9BCF9707268C6E6B00D7FD6D /* UITextInputMode+Emoji.swift */,
 				9B1255F526903C3F0052C742 /* UIView+Shake.swift */,
+				9BF60EB52691DD7D00E0C5C3 /* UIImage+Resize.swift */,
 				9BF60EA42691607100E0C5C3 /* Keyboard+LayoutGuide.swift */,
 				9B5F3BEA268F286A00222100 /* NSManagedObjectContext+Save.swift */,
 				9BF60EB12691C68A00E0C5C3 /* StickerSet+Import.swift */,
@@ -214,6 +217,7 @@
 				9BA67F50268A044500B7597F /* Telegram_Memoji.xcdatamodeld in Sources */,
 				9BF60EA92691A4A000E0C5C3 /* EmojiLabel.swift in Sources */,
 				9BA67F46268A044500B7597F /* AppDelegate.swift in Sources */,
+				9BF60EB62691DD7D00E0C5C3 /* UIImage+Resize.swift in Sources */,
 				9BA67F48268A044500B7597F /* SceneDelegate.swift in Sources */,
 				9BF60EB22691C68A00E0C5C3 /* StickerSet+Import.swift in Sources */,
 				9BCF9705268C34DD00D7FD6D /* StickerInputViewController.swift in Sources */,
