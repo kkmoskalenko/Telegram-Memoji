@@ -20,6 +20,7 @@
 		9BCF9708268C6E6B00D7FD6D /* UITextInputMode+Emoji.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BCF9707268C6E6B00D7FD6D /* UITextInputMode+Emoji.swift */; };
 		9BE360A2268C845C003C4370 /* StickerCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BE360A1268C845C003C4370 /* StickerCollectionViewController.swift */; };
 		9BF60EA52691607100E0C5C3 /* Keyboard+LayoutGuide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF60EA42691607100E0C5C3 /* Keyboard+LayoutGuide.swift */; };
+		9BF60EA92691A4A000E0C5C3 /* EmojiLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF60EA82691A4A000E0C5C3 /* EmojiLabel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		9BCF9707268C6E6B00D7FD6D /* UITextInputMode+Emoji.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextInputMode+Emoji.swift"; sourceTree = "<group>"; };
 		9BE360A1268C845C003C4370 /* StickerCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerCollectionViewController.swift; sourceTree = "<group>"; };
 		9BF60EA42691607100E0C5C3 /* Keyboard+LayoutGuide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Keyboard+LayoutGuide.swift"; sourceTree = "<group>"; };
+		9BF60EA82691A4A000E0C5C3 /* EmojiLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiLabel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +93,7 @@
 			children = (
 				9B589652268C29940053A936 /* Delegates */,
 				9B589653268C29A30053A936 /* View Controllers */,
+				9BF60EA62691A48D00E0C5C3 /* Views */,
 				9BCF9706268C6E4300D7FD6D /* Extensions */,
 				9BA67F4B268A044500B7597F /* Main.storyboard */,
 				9BA67F51268A044600B7597F /* Assets.xcassets */,
@@ -110,6 +113,14 @@
 				9B5F3BEA268F286A00222100 /* NSManagedObjectContext+Save.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		9BF60EA62691A48D00E0C5C3 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				9BF60EA82691A4A000E0C5C3 /* EmojiLabel.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -186,6 +197,7 @@
 				9B5F3BEB268F286A00222100 /* NSManagedObjectContext+Save.swift in Sources */,
 				9BA67F4A268A044500B7597F /* StickerSetsViewController.swift in Sources */,
 				9BA67F50268A044500B7597F /* Telegram_Memoji.xcdatamodeld in Sources */,
+				9BF60EA92691A4A000E0C5C3 /* EmojiLabel.swift in Sources */,
 				9BA67F46268A044500B7597F /* AppDelegate.swift in Sources */,
 				9BA67F48268A044500B7597F /* SceneDelegate.swift in Sources */,
 				9BCF9705268C34DD00D7FD6D /* StickerInputViewController.swift in Sources */,

@@ -168,13 +168,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="It4-6C-Goe">
-                                <rect key="frame" x="103.5" y="16" width="207" height="207"/>
-                                <color key="backgroundColor" systemColor="systemFillColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="It4-6C-Goe" secondAttribute="height" id="KSE-xG-UHl"/>
-                                </constraints>
-                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k6c-6w-j83">
                                 <rect key="frame" x="153.5" y="728" width="107" height="30"/>
                                 <state key="normal" title="Show Keyboard"/>
@@ -182,6 +175,53 @@
                                     <action selector="showKeyboardButtonAction:" destination="mBa-9k-e18" eventType="touchUpInside" id="D8J-nU-7hU"/>
                                 </connections>
                             </button>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YtR-Ol-4qt">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="774"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="It4-6C-Goe">
+                                        <rect key="frame" x="145" y="20" width="124" height="124"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="It4-6C-Goe" secondAttribute="height" id="KSE-xG-UHl"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="clip" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kbE-fP-gOx" customClass="EmojiLabel" customModule="Telegram_Memoji" customModuleProvider="target">
+                                        <rect key="frame" x="20" y="160" width="374" height="50"/>
+                                        <color key="backgroundColor" systemColor="systemFillColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="EBo-6T-JOg"/>
+                                            <constraint firstAttribute="width" relation="lessThanOrEqual" constant="400" id="akX-4F-lyI"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter at least one emoji that expresses the emotion corresponding to the sticker." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hyx-ot-gYx">
+                                        <rect key="frame" x="20" y="226" width="374" height="36"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                        <color key="textColor" systemColor="secondaryLabelColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="kbE-fP-gOx" firstAttribute="leading" secondItem="YtR-Ol-4qt" secondAttribute="leading" priority="999" constant="20" symbolic="YES" id="7Mr-t7-gSu"/>
+                                    <constraint firstItem="It4-6C-Goe" firstAttribute="width" secondItem="YtR-Ol-4qt" secondAttribute="width" multiplier="0.3" priority="999" id="Evj-Jw-nzN"/>
+                                    <constraint firstAttribute="trailing" secondItem="kbE-fP-gOx" secondAttribute="trailing" priority="999" constant="20" symbolic="YES" id="PbD-7W-p1e"/>
+                                    <constraint firstItem="hyx-ot-gYx" firstAttribute="top" secondItem="kbE-fP-gOx" secondAttribute="bottom" constant="16" id="RxZ-Py-5CC"/>
+                                    <constraint firstItem="It4-6C-Goe" firstAttribute="height" relation="lessThanOrEqual" secondItem="YtR-Ol-4qt" secondAttribute="height" multiplier="0.3" id="Sti-zJ-seg"/>
+                                    <constraint firstItem="It4-6C-Goe" firstAttribute="top" secondItem="YtR-Ol-4qt" secondAttribute="top" constant="20" symbolic="YES" id="V49-qJ-Ope"/>
+                                    <constraint firstItem="kbE-fP-gOx" firstAttribute="top" secondItem="It4-6C-Goe" secondAttribute="bottom" constant="16" id="egg-Ly-QOO"/>
+                                    <constraint firstItem="hyx-ot-gYx" firstAttribute="leading" secondItem="kbE-fP-gOx" secondAttribute="leading" id="f1W-8y-YdB"/>
+                                    <constraint firstItem="It4-6C-Goe" firstAttribute="centerX" secondItem="YtR-Ol-4qt" secondAttribute="centerX" id="jJr-WB-pL0"/>
+                                    <constraint firstItem="kbE-fP-gOx" firstAttribute="centerX" secondItem="YtR-Ol-4qt" secondAttribute="centerX" id="m8t-W3-EzD"/>
+                                    <constraint firstItem="hyx-ot-gYx" firstAttribute="trailing" secondItem="kbE-fP-gOx" secondAttribute="trailing" id="nLT-R0-qOb"/>
+                                </constraints>
+                            </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="At7-l1-eVM">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="774"/>
                                 <subviews>
@@ -224,14 +264,16 @@
                         <viewLayoutGuide key="safeArea" id="ftf-YZ-epf"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="It4-6C-Goe" firstAttribute="width" secondItem="ftf-YZ-epf" secondAttribute="width" multiplier="0.5" id="LiL-hV-gMZ"/>
+                            <constraint firstItem="ftf-YZ-epf" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="hyx-ot-gYx" secondAttribute="bottom" constant="16" id="78p-L8-535"/>
                             <constraint firstItem="At7-l1-eVM" firstAttribute="bottom" secondItem="ftf-YZ-epf" secondAttribute="bottom" placeholder="YES" id="VXe-hl-vit"/>
                             <constraint firstItem="At7-l1-eVM" firstAttribute="leading" secondItem="ftf-YZ-epf" secondAttribute="leading" id="YBT-jx-k60"/>
                             <constraint firstItem="k6c-6w-j83" firstAttribute="centerX" secondItem="msB-Us-Ypr" secondAttribute="centerX" id="aaa-6r-bUq"/>
                             <constraint firstItem="ftf-YZ-epf" firstAttribute="bottom" secondItem="k6c-6w-j83" secondAttribute="bottom" constant="16" id="hkr-1j-SJI"/>
-                            <constraint firstItem="It4-6C-Goe" firstAttribute="centerX" secondItem="ftf-YZ-epf" secondAttribute="centerX" id="hv5-hg-yR6"/>
-                            <constraint firstItem="It4-6C-Goe" firstAttribute="top" secondItem="ftf-YZ-epf" secondAttribute="top" constant="16" id="pu2-aB-wb4"/>
+                            <constraint firstItem="YtR-Ol-4qt" firstAttribute="leading" secondItem="ftf-YZ-epf" secondAttribute="leading" id="lqF-sB-2eb"/>
+                            <constraint firstItem="ftf-YZ-epf" firstAttribute="top" secondItem="YtR-Ol-4qt" secondAttribute="top" id="t0f-bQ-5V8"/>
                             <constraint firstItem="At7-l1-eVM" firstAttribute="top" secondItem="ftf-YZ-epf" secondAttribute="top" id="vfI-Cx-zRc"/>
+                            <constraint firstItem="ftf-YZ-epf" firstAttribute="bottom" secondItem="YtR-Ol-4qt" secondAttribute="bottom" id="vir-mN-K0c"/>
+                            <constraint firstItem="ftf-YZ-epf" firstAttribute="trailing" secondItem="YtR-Ol-4qt" secondAttribute="trailing" id="xNy-gw-0Zi"/>
                             <constraint firstItem="ftf-YZ-epf" firstAttribute="trailing" secondItem="At7-l1-eVM" secondAttribute="trailing" id="yd1-Vp-dOz"/>
                         </constraints>
                     </view>
@@ -248,6 +290,8 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="emojiInputView" destination="YtR-Ol-4qt" id="Bhi-6H-grc"/>
+                        <outlet property="emojiLabel" destination="kbE-fP-gOx" id="6Oo-so-NU9"/>
                         <outlet property="imageView" destination="It4-6C-Goe" id="TZL-Xa-PZQ"/>
                         <outlet property="keyboardTipsTitleLabel" destination="aD9-qm-ThG" id="kIZ-NY-xif"/>
                         <outlet property="keyboardTipsView" destination="At7-l1-eVM" id="fjg-Yc-hLH"/>

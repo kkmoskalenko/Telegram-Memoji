@@ -21,7 +21,7 @@ final class StickerInputViewController: UIViewController {
                 .transitionCrossDissolve, .curveEaseOut
             ]) {
                 self.keyboardTipsView.isHidden = hasImage
-                self.imageView.isHidden = !hasImage
+                self.emojiInputView.isHidden = !hasImage
                 self.imageView.image = self.stickerImage
             }
         }
@@ -38,7 +38,10 @@ final class StickerInputViewController: UIViewController {
     
     // MARK: IB Outlets
     
+    @IBOutlet private var emojiInputView: UIView!
     @IBOutlet private var imageView: UIImageView!
+    @IBOutlet private var emojiLabel: EmojiLabel!
+    
     @IBOutlet private var keyboardTipsView: UIScrollView!
     @IBOutlet private var keyboardTipsTitleLabel: UILabel!
 }
@@ -90,14 +93,18 @@ extension StickerInputViewController {
 // MARK: - UIKeyInput
 
 extension StickerInputViewController: UIKeyInput {
-    var hasText: Bool { false }
+    var hasText: Bool {
+        emojiLabel.characterCount > 0
+    }
     
     func insertText(_ text: String) {
-        
+        if !emojiInputView.isHidden,
+           emojiLabel.characterCount < 5
+        { emojiLabel.text?.append(text) }
     }
     
     func deleteBackward() {
-        
+        emojiLabel.text?.removeLast()
     }
 }
 
